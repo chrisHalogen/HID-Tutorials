@@ -99,7 +99,12 @@ JAZZMIN_SETTINGS = {
 
 If you found this helpful, feel free to share this guide with your colleagues.
 
-🔗 **Guide Link:** YOUR_GITHUB_REPO_LINK
+🔗 **Guide Link:** 
+
+```bash
+https://github.com/chrisHalogen/HID-Tutorials/tree/main/Enhance-Django-Admin
+
+```
 
 ----------
 
