@@ -10,6 +10,12 @@ Ensure you have:
 
 ---
 
+## 📺 YouTube Tutorial
+Watch the full tutorial on YouTube:
+[COMING SOON](#)
+
+---
+
 ## 1. Create an Empty Repository on GitHub
 1. Go to [GitHub](https://github.com/) and create a new repository named **deploy-react-git**.
 2. Do **not** initialize with a README, `.gitignore`, or license.
