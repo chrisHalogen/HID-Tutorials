@@ -136,12 +136,12 @@ This ensures your site stays up to date with your latest changes.
 ```html
 https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github
 ```
-<button onclick="navigator.clipboard.writeText('https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github'); alert('Copied to clipboard!');">📋 Copy Link</button>
 
 ---
 
 ## 🎉 Support Us!
 If this guide was helpful, please support us by:
+
 ✅ Liking the video: [COMING SOON](#)  
 ✅ [Subscribing to the channel](https://www.youtube.com/@halogenius-ideas)  
 ✅ Sharing it on your social platforms  
