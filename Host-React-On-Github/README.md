@@ -35,6 +35,9 @@ Navigate into the cloned repo:
 
 Copy your React project files into this directory.
 
+🔹 **Need help with access tokens?** Watch this tutorial:  
+[How to Use GitHub Access Tokens](https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github)
+
 ---
 
 ## 3. Install Dependencies
@@ -127,5 +130,19 @@ This ensures your site stays up to date with your latest changes.
 
 ---
 
-## 🎉 Congratulations!
-Your React app is now hosted on GitHub Pages! 🚀
+## 🔗 Share This Guide
+
+📢 **Copy this guide link to share with a colleague or friend:**
+```html
+https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github
+```
+<button onclick="navigator.clipboard.writeText('https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github'); alert('Copied to clipboard!');">📋 Copy Link</button>
+
+---
+
+## 🎉 Support Us!
+If this guide was helpful, please support us by:
+✅ Liking the video: [COMING SOON](#)  
+✅ [Subscribing to the channel](https://www.youtube.com/@halogenius-ideas)  
+✅ Sharing it on your social platforms  
+Thank you! 🚀
