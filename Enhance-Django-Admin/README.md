@@ -9,7 +9,7 @@
 
 ## 📺 Video Tutorial
 
-🎥 Watch the step-by-step tutorial on YouTube: COMING SOON
+🎥 Watch the step-by-step tutorial on YouTube: [https://youtu.be/KJ3KNYKrCTc](https://youtu.be/KJ3KNYKrCTc)
 
 ----------
 
@@ -117,7 +117,7 @@ If you found this tutorial helpful, please support by:
 📢 **Sharing it on your social media platforms**
 
 📢 **Subscribe Here:** https://www.youtube.com/@halogenius-ideas  
-📺 **Watch the Video Here:** COMING SOON
+📺 **Watch the Video Here:** [https://youtu.be/KJ3KNYKrCTc](https://youtu.be/KJ3KNYKrCTc)
 
 🚀 Thank you for your support! 🔥
 
