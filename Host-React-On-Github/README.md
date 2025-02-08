@@ -36,7 +36,7 @@ Navigate into the cloned repo:
 Copy your React project files into this directory.
 
 🔹 **Need help with access tokens?** Watch this tutorial:  
-[How to Use GitHub Access Tokens](https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github)
+[How to Use GitHub Access Tokens](https://www.youtube.com/watch?v=EX5-YlAXD3Q)
 
 ---
 
