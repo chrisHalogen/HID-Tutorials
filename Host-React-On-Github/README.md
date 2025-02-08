@@ -12,7 +12,7 @@ Ensure you have:
 
 ## 📺 YouTube Tutorial
 Watch the full tutorial on YouTube:
-[COMING SOON](#)
+[https://youtu.be/LKxL-wlwTOw](https://youtu.be/LKxL-wlwTOw)
 
 ---
 
@@ -142,7 +142,7 @@ https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github
 ## 🎉 Support Us!
 If this guide was helpful, please support us by:
 
-✅ Liking the video: [COMING SOON](#)  
-✅ [Subscribing to the channel](https://www.youtube.com/@halogenius-ideas)  
+✅ Liking the video: [https://youtu.be/LKxL-wlwTOw](https://youtu.be/LKxL-wlwTOw)  
+✅ Subscribing to the channel: [https://www.youtube.com/@halogenius-ideas](https://www.youtube.com/@halogenius-ideas)  
 ✅ Sharing it on your social platforms  
 Thank you! 🚀
