@@ -909,6 +909,4 @@ If this tutorial helped you, consider showing your support:
 
 Thank you for learning with us! 🙌💙
 
----
 
-Let me know if you want me to convert this to a downloadable `README.md` file or generate a visual thumbnail for promoting it.
