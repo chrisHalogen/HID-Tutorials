@@ -889,10 +889,10 @@ You now have the foundation for a more advanced chat app. Well done! 👏
 
 ## 🔗 Share This Guide
 
-📢 **Share this project with friends or dev colleagues:**
+📢 **Share this guide with friends or dev colleagues:**
 
 ```
-https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github
+https://github.com/chrisHalogen/HID-Tutorials/blob/main/django-react-chat-app/README.md
 ```
 
 Feel free to fork or star the repository!
