@@ -19,7 +19,7 @@ Make sure you have the following installed:
 ## 📺 YouTube Tutorial
 
 Watch the full video walkthrough on YouTube:  
-🎥 [COMING SOON](https://youtu.be/LKxL-wlwTOw)
+🎥  [https://youtu.be/8yHZdCTDRi0](https://youtu.be/8yHZdCTDRi0)
 
 ---
 
@@ -88,7 +88,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'chat',
-    'users',
 ]
 
 MIDDLEWARE = [
@@ -864,7 +863,7 @@ Make sure you have Vite installed and your dependencies set up.
 To test the chat app, follow these steps:
 
 1. Open **two different browsers** or use **incognito mode** for the second window.
-2. Navigate to: [http://localhost:3000/](http://localhost:3000/)
+2. Navigate to: [http://localhost:3000/](http://localhost:3000/) or any link displayed on the Vite Console.
 3. In both windows, enter a **username** and the **same room name**.
 4. Start sending messages!
    - Your messages will appear **on the right** (as sent).
@@ -903,7 +902,7 @@ Feel free to fork or star the repository!
 
 If this tutorial helped you, consider showing your support:
 
-- 👍 Like the video → [Watch on YouTube](https://youtu.be/LKxL-wlwTOw)  
+- 👍 Like the video → [Watch on YouTube](https://youtu.be/8yHZdCTDRi0)  
 - 🔔 Subscribe to the channel → [Halogenius Ideas](https://www.youtube.com/@halogenius-ideas)  
 - 📢 Share this project on your socials
 
