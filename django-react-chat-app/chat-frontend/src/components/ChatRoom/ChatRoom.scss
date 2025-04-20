@@ -1,0 +1,128 @@
+.chat-room-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    .chat-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+      h2 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+  
+      p {
+        margin: 0.5rem 0 0;
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+    }
+  
+    .messages-container {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background-color: #e5e7eb;
+  
+      .message {
+        display: flex;
+        margin-bottom: 1rem;
+  
+        &.sent {
+          justify-content: flex-end;
+  
+          .message-content {
+            background-color: #667eea;
+            color: white;
+            border-radius: 18px 18px 0 18px;
+          }
+        }
+  
+        &.received {
+          justify-content: flex-start;
+  
+          .message-content {
+            background-color: white;
+            color: #333;
+            border-radius: 18px 18px 18px 0;
+          }
+        }
+  
+        .message-content {
+          max-width: 70%;
+          padding: 0.75rem 1rem;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+          .message-sender {
+            display: block;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+            color: #555;
+          }
+  
+          p {
+            margin: 0;
+            word-wrap: break-word;
+          }
+  
+          .message-time {
+            display: block;
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+            opacity: 0.7;
+            text-align: right;
+          }
+        }
+      }
+    }
+  
+    .message-form {
+      display: flex;
+      padding: 1rem;
+      background-color: white;
+      border-top: 1px solid #ddd;
+  
+      input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        font-size: 1rem;
+        margin-right: 0.5rem;
+        outline: none;
+        transition: border-color 0.3s;
+  
+        &:focus {
+          border-color: #667eea;
+        }
+      }
+  
+      button {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+  
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 2px 5px rgba(102, 126, 234, 0.5);
+        }
+  
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
