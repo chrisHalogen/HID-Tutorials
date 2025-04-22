@@ -361,27 +361,32 @@ Create this file to handle location broadcasting:
 ```javascript
 // src/BroadcastPage.jsx
 
-import { useState } from "react";
-import { doc, setDoc, deleteDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { doc, setDoc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { signInAnonymously } from "firebase/auth";
-import { database, auth } from "./firebase";
-import { DEFAULT_COORDINATES, COORDINATE_VARIATION, SIMULATION_STEP } from "./constants";
-import { 
-  Button, TextField, Box, Typography, Card, CardContent,
-  Avatar, CircularProgress, Switch, FormControlLabel
+import { database, auth } from "./firebaseFS";
+import {
+  Button,
+  TextField,
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Avatar,
+  CircularProgress,
+  Switch,
+  FormControlLabel,
 } from "@mui/material";
 import { LocationOn, Send, Stop, DirectionsWalk } from "@mui/icons-material";
 
 export default function BroadcastPage() {
-  // State management
   const [name, setName] = useState("");
   const [isBroadcasting, setIsBroadcasting] = useState(false);
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [simulateMovement, setSimulateMovement] = useState(false);
   const [simulatedPosition, setSimulatedPosition] = useState(null);
-  
-  // Update location in Firestore
+
   const updateLocation = async (uid, coords) => {
     await setDoc(doc(database, "locations", uid), {
       name,
@@ -392,21 +397,21 @@ export default function BroadcastPage() {
     });
   };
 
-  // Start/stop broadcasting functions
   const startBroadcasting = async () => {
     if (!name) return;
+
     setLoading(true);
-    
+
     try {
       const { user } = await signInAnonymously(auth);
       setUserId(user.uid);
-      
+
       if (simulateMovement) {
         startSimulatedMovement(user.uid);
       } else {
         startRealLocationUpdates(user.uid);
       }
-      
+
       setIsBroadcasting(true);
     } catch (error) {
       console.error("Error:", error);
@@ -415,42 +420,41 @@ export default function BroadcastPage() {
     }
   };
 
-  // Clean up functions
   const stopBroadcasting = async () => {
-    if (userId) await deleteDoc(doc(database, "locations", userId));
+    if (userId) {
+      await deleteDoc(doc(database, "locations", userId));
+    }
     setIsBroadcasting(false);
     setUserId(null);
     stopSimulatedMovement();
   };
 
-  // Location tracking implementation
   const startRealLocationUpdates = (uid) => {
     const watchId = navigator.geolocation.watchPosition(
       (position) => updateLocation(uid, position.coords),
       (error) => console.error("Geolocation error:", error),
       { enableHighAccuracy: true }
     );
-    
+
     return () => navigator.geolocation.clearWatch(watchId);
   };
 
-  // Simulation functions
   let simulationIntervalId = null;
 
   const startSimulatedMovement = (uid) => {
     const startPos = {
-      latitude: DEFAULT_COORDINATES.latitude + (Math.random() * COORDINATE_VARIATION - COORDINATE_VARIATION/2),
-      longitude: DEFAULT_COORDINATES.longitude + (Math.random() * COORDINATE_VARIATION - COORDINATE_VARIATION/2),
+      latitude: 6.5244 + (Math.random() * 0.02 - 0.01),
+      longitude: 3.3792 + (Math.random() * 0.02 - 0.01),
     };
     setSimulatedPosition(startPos);
     updateLocation(uid, startPos);
-    
+
     simulationIntervalId = setInterval(() => {
       setSimulatedPosition((prev) => {
         if (!prev) return prev;
         const newPos = {
-          latitude: prev.latitude + (Math.random() * SIMULATION_STEP - SIMULATION_STEP/2),
-          longitude: prev.longitude + (Math.random() * SIMULATION_STEP - SIMULATION_STEP/2),
+          latitude: prev.latitude + (Math.random() * 0.0002 - 0.0001),
+          longitude: prev.longitude + (Math.random() * 0.0002 - 0.0001),
         };
         updateLocation(uid, newPos);
         return newPos;
@@ -466,7 +470,7 @@ export default function BroadcastPage() {
     setSimulatedPosition(null);
   };
 
-   const toggleBroadcasting = async () => {
+  const toggleBroadcasting = async () => {
     if (isBroadcasting) {
       await stopBroadcasting();
     } else {
@@ -474,7 +478,6 @@ export default function BroadcastPage() {
     }
   };
 
-  // Render the component
   return (
     <Box
       sx={{
@@ -496,7 +499,6 @@ export default function BroadcastPage() {
         }}
       >
         <CardContent sx={{ p: 4 }}>
-          {/* Header section with logo */}
           <Box textAlign="center" mb={3}>
             <Avatar
               sx={{
@@ -517,7 +519,6 @@ export default function BroadcastPage() {
             </Typography>
           </Box>
 
-          {/* Name input field */}
           <TextField
             label="Your Name"
             value={name}
@@ -529,7 +530,23 @@ export default function BroadcastPage() {
             sx={{ mb: 3 }}
           />
 
-          {/* Broadcast button */}
+          <FormControlLabel
+            control={
+              <Switch
+                checked={simulateMovement}
+                onChange={() => setSimulateMovement(!simulateMovement)}
+                disabled={isBroadcasting}
+              />
+            }
+            label={
+              <Box display="flex" alignItems="center">
+                <DirectionsWalk sx={{ mr: 1 }} />
+                Simulate Movement
+              </Box>
+            }
+            sx={{ mb: 3 }}
+          />
+
           <Button
             variant="contained"
             onClick={toggleBroadcasting}
@@ -562,11 +579,18 @@ export default function BroadcastPage() {
               : "Start Broadcasting"}
           </Button>
 
-          {/* Status message */}
           {isBroadcasting && (
             <Box mt={3} p={2} bgcolor="#f0f4ff" borderRadius={2}>
               <Typography variant="body2">
-                Your real location is being shared
+                {simulateMovement ? (
+                  <>
+                    <strong>Simulation Active</strong> - Moving randomly around{" "}
+                    {simulatedPosition?.latitude.toFixed(4)},
+                    {simulatedPosition?.longitude.toFixed(4)}
+                  </>
+                ) : (
+                  "Your real location is being shared"
+                )}
               </Typography>
             </Box>
           )}
@@ -575,6 +599,7 @@ export default function BroadcastPage() {
     </Box>
   );
 }
+
 ```
 
 ### 6. LocationsListener.jsx
