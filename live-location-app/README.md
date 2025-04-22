@@ -361,10 +361,13 @@ Create this file to handle location broadcasting:
 ```javascript
 // src/BroadcastPage.jsx
 
+// React and Firebase hooks & functions
 import { useState, useEffect } from "react";
-import { doc, setDoc, onSnapshot, deleteDoc } from "firebase/firestore";
-import { signInAnonymously } from "firebase/auth";
-import { database, auth } from "./firebase";
+import { doc, setDoc, onSnapshot, deleteDoc } from "firebase/firestore"; // Firestore methods
+import { signInAnonymously } from "firebase/auth"; // Auth method
+import { database, auth } from "./firebase"; // Custom Firebase config
+
+// Material UI components & icons
 import {
   Button,
   TextField,
@@ -379,89 +382,114 @@ import {
 } from "@mui/material";
 import { LocationOn, Send, Stop, DirectionsWalk } from "@mui/icons-material";
 
-export default function BroadcastPage() {
-  const [name, setName] = useState("");
-  const [isBroadcasting, setIsBroadcasting] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [simulateMovement, setSimulateMovement] = useState(false);
-  const [simulatedPosition, setSimulatedPosition] = useState(null);
+// Constants for simulation
+import {
+  DEFAULT_COORDINATES,
+  COORDINATE_VARIATION,
+  SIMULATION_STEP,
+} from "./constants";
 
+// Main component to broadcast user's location
+export default function BroadcastPage() {
+  const [name, setName] = useState(""); // User's name input
+  const [isBroadcasting, setIsBroadcasting] = useState(false); // Tracks broadcasting state
+  const [userId, setUserId] = useState(null); // Firebase Auth user ID
+  const [loading, setLoading] = useState(false); // Loading state during auth/broadcast
+  const [simulateMovement, setSimulateMovement] = useState(false); // Toggle for simulation
+  const [simulatedPosition, setSimulatedPosition] = useState(null); // Current simulated coordinates
+
+  // Upload user location to Firestore
   const updateLocation = async (uid, coords) => {
     await setDoc(doc(database, "locations", uid), {
-      name,
+      name, // user's display name
       latitude: coords.latitude,
       longitude: coords.longitude,
-      timestamp: new Date(),
-      isSimulated: simulateMovement,
+      timestamp: new Date(), // current time
+      isSimulated: simulateMovement, // flag for simulated or real data
     });
   };
 
+  // Starts the location broadcasting session
   const startBroadcasting = async () => {
-    if (!name) return;
+    if (!name) return; // Ensure name is entered
 
-    setLoading(true);
+    setLoading(true); // Show loading spinner
 
     try {
-      const { user } = await signInAnonymously(auth);
-      setUserId(user.uid);
+      const { user } = await signInAnonymously(auth); // Anonymous login
+      setUserId(user.uid); // Store UID
 
+      // Decide between simulated or real geolocation
       if (simulateMovement) {
         startSimulatedMovement(user.uid);
       } else {
         startRealLocationUpdates(user.uid);
       }
 
-      setIsBroadcasting(true);
+      setIsBroadcasting(true); // Mark as broadcasting
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error); // Handle errors
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading spinner
     }
   };
 
+  // Stops the location broadcasting session
   const stopBroadcasting = async () => {
     if (userId) {
-      await deleteDoc(doc(database, "locations", userId));
+      await deleteDoc(doc(database, "locations", userId)); // Remove location from Firestore
     }
-    setIsBroadcasting(false);
-    setUserId(null);
-    stopSimulatedMovement();
+    setIsBroadcasting(false); // Reset state
+    setUserId(null); // Clear user ID
+    stopSimulatedMovement(); // Stop simulated movement (if any)
   };
 
+  // Start watching real-time location via Geolocation API
   const startRealLocationUpdates = (uid) => {
     const watchId = navigator.geolocation.watchPosition(
-      (position) => updateLocation(uid, position.coords),
-      (error) => console.error("Geolocation error:", error),
-      { enableHighAccuracy: true }
+      (position) => updateLocation(uid, position.coords), // Success callback
+      (error) => console.error("Geolocation error:", error), // Error callback
+      { enableHighAccuracy: true } // Enable high accuracy
     );
 
-    return () => navigator.geolocation.clearWatch(watchId);
+    return () => navigator.geolocation.clearWatch(watchId); // Cleanup
   };
 
+  // Variable to hold simulation interval ID
   let simulationIntervalId = null;
 
+  // Simulates random movement from a starting point
   const startSimulatedMovement = (uid) => {
     const startPos = {
-      latitude: 6.5244 + (Math.random() * 0.02 - 0.01),
-      longitude: 3.3792 + (Math.random() * 0.02 - 0.01),
+      latitude:
+        DEFAULT_COORDINATES.latitude +
+        (Math.random() * COORDINATE_VARIATION - COORDINATE_VARIATION / 2),
+      longitude:
+        DEFAULT_COORDINATES.longitude +
+        (Math.random() * COORDINATE_VARIATION - COORDINATE_VARIATION / 2),
     };
-    setSimulatedPosition(startPos);
-    updateLocation(uid, startPos);
+    setSimulatedPosition(startPos); // Set initial simulated location
+    updateLocation(uid, startPos); // Push to Firestore
 
+    // Every 2 seconds, simulate a small random movement
     simulationIntervalId = setInterval(() => {
       setSimulatedPosition((prev) => {
         if (!prev) return prev;
         const newPos = {
-          latitude: prev.latitude + (Math.random() * 0.0002 - 0.0001),
-          longitude: prev.longitude + (Math.random() * 0.0002 - 0.0001),
+          latitude:
+            prev.latitude +
+            (Math.random() * SIMULATION_STEP - SIMULATION_STEP / 2),
+          longitude:
+            prev.longitude +
+            (Math.random() * SIMULATION_STEP - SIMULATION_STEP / 2),
         };
-        updateLocation(uid, newPos);
-        return newPos;
+        updateLocation(uid, newPos); // Update Firestore
+        return newPos; // Set new position
       });
     }, 2000);
   };
 
+  // Clears the simulation interval
   const stopSimulatedMovement = () => {
     if (simulationIntervalId) {
       clearInterval(simulationIntervalId);
@@ -470,6 +498,7 @@ export default function BroadcastPage() {
     setSimulatedPosition(null);
   };
 
+  // Toggle broadcast state: start or stop
   const toggleBroadcasting = async () => {
     if (isBroadcasting) {
       await stopBroadcasting();
@@ -478,6 +507,7 @@ export default function BroadcastPage() {
     }
   };
 
+  // UI Rendering
   return (
     <Box
       sx={{
@@ -499,6 +529,7 @@ export default function BroadcastPage() {
         }}
       >
         <CardContent sx={{ p: 4 }}>
+          {/* Header with Avatar and Title */}
           <Box textAlign="center" mb={3}>
             <Avatar
               sx={{
@@ -519,6 +550,7 @@ export default function BroadcastPage() {
             </Typography>
           </Box>
 
+          {/* Name input field */}
           <TextField
             label="Your Name"
             value={name}
@@ -530,6 +562,7 @@ export default function BroadcastPage() {
             sx={{ mb: 3 }}
           />
 
+          {/* Simulation toggle */}
           <FormControlLabel
             control={
               <Switch
@@ -547,6 +580,7 @@ export default function BroadcastPage() {
             sx={{ mb: 3 }}
           />
 
+          {/* Start/Stop button */}
           <Button
             variant="contained"
             onClick={toggleBroadcasting}
@@ -579,6 +613,7 @@ export default function BroadcastPage() {
               : "Start Broadcasting"}
           </Button>
 
+          {/* Info Box displayed when broadcasting */}
           {isBroadcasting && (
             <Box mt={3} p={2} bgcolor="#f0f4ff" borderRadius={2}>
               <Typography variant="body2">
