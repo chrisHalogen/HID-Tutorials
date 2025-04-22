@@ -364,7 +364,7 @@ Create this file to handle location broadcasting:
 import { useState, useEffect } from "react";
 import { doc, setDoc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { signInAnonymously } from "firebase/auth";
-import { database, auth } from "./firebaseFS";
+import { database, auth } from "./firebase";
 import {
   Button,
   TextField,
