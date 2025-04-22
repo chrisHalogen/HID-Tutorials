@@ -901,7 +901,7 @@ Congratulations! You've built a fully functional real-time location tracking app
 
 📢 **Copy this guide link to share with a colleague or friend:**
 ```html
-https://github.com/chrisHalogen/HID-Tutorials/tree/main/Host-React-On-Github
+https://github.com/chrisHalogen/HID-Tutorials/tree/main/live-location-app
 ```
 
 ## Support Us!
