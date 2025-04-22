@@ -466,6 +466,14 @@ export default function BroadcastPage() {
     setSimulatedPosition(null);
   };
 
+   const toggleBroadcasting = async () => {
+    if (isBroadcasting) {
+      await stopBroadcasting();
+    } else {
+      await startBroadcasting();
+    }
+  };
+
   // Render the component
   return (
     <Box
