@@ -10,7 +10,7 @@ This tutorial will guide you through building a real-time location tracking app 
 
 ## YouTube Tutorial
 Watch the full tutorial on YouTube:
-[COMING SOON](https://youtu.be/LKxL-wlwTOw)
+[https://youtu.be/rLpiCCTbC7c](https://youtu.be/rLpiCCTbC7c)
 
 
 ## Prerequisites
@@ -975,7 +975,7 @@ https://github.com/chrisHalogen/HID-Tutorials/tree/main/live-location-app
 ## Support Us!
 If this guide was helpful, please support us by:
 
-✅ Liking the video: [COMING SOON](https://youtu.be/LKxL-wlwTOw)  
+✅ Liking the video: [https://youtu.be/rLpiCCTbC7c](https://youtu.be/rLpiCCTbC7c) 
 ✅ Subscribing to the channel: [https://www.youtube.com/@halogenius-ideas](https://www.youtube.com/@halogenius-ideas)  
 ✅ Sharing it on your social platforms  
 Thank you! 🚀
