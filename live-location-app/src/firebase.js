@@ -5,12 +5,12 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 
 // Your Firebase configuration (replace with your actual config)
 const firebaseConfig = {
-  apiKey: "AIzaSyDWFlOHkj5UjvCSPAPlf1XzDMZ_CudANuo",
-  authDomain: "location-app-tutorial.firebaseapp.com",
-  projectId: "location-app-tutorial",
-  storageBucket: "location-app-tutorial.firebasestorage.app",
-  messagingSenderId: "228578314031",
-  appId: "1:228578314031:web:dc4e663143d5012cda83da",
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
 };
 
 // Initialize Firebase
