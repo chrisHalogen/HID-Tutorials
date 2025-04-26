@@ -6,8 +6,7 @@ Build a beautiful AI-powered chat application using Django for the backend and R
 - Modern UI with Material-UI
 - Gemini AI integration
 - Markdown rendering (tables, code blocks, lists)
-- Responsive design
-- Typewriter effect for AI responses
+
 
 ## 📋 Prerequisites
 Before starting, ensure you have:
