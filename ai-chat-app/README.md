@@ -18,7 +18,7 @@ Before starting, ensure you have:
 ## 📺 YouTube Tutorial
 
 Watch the full video walkthrough on YouTube:  
-🎥  [COMING SOON](https://youtu.be/8yHZdCTDRi0)
+🎥  [https://youtu.be/IxnGgMtzXM8](https://youtu.be/IxnGgMtzXM8)
 
 ## Architecture Overview
 
@@ -35,16 +35,16 @@ Watch the full video walkthrough on YouTube:
 
 ## Step 1: Set Up Django Backend
 
-### 1. Create Django Project and App
+### 1. Install Required Packages
+```bash
+pip install django djangorestframework django-cors-headers
+```
+
+### 2. Create Django Project and App
 ```bash
 django-admin startproject aichatbackend
 cd aichatbackend
 python manage.py startapp chatapi
-```
-
-### 2. Install Required Packages
-```bash
-pip install django djangorestframework django-cors-headers
 ```
 
 ### 3. Configure settings.py
@@ -501,7 +501,7 @@ You've now built a full-stack AI chat application with:
 ## 📢 Share This Guide
 Found this useful? Share with your network:  
 ```
-COMING_SOON_LINK
+https://github.com/chrisHalogen/HID-Tutorials/tree/main/ai-chat-app
 ```
 
 ## 💖 Support Us
