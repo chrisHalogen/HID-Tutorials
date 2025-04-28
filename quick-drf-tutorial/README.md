@@ -15,8 +15,8 @@ source venv/bin/activate  # On Windows use: venv\Scripts\activate
 pip install django djangorestframework
 
 # Create project and app
-django-admin startproject myapi
-cd myapi
+django-admin startproject backend
+cd backend
 python manage.py startapp api
 ```
 
