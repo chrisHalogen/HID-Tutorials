@@ -101,7 +101,43 @@ urlpatterns = [
    - Project-wide file: `http://localhost:8000/download/project/`
    - App-specific file: `http://localhost:8000/download/app/`
 
-## 2. Accessing Static Files in Templates
+### Step 6: Accessing Files in Browser
+
+1. **Project-wide static files**:
+   ```
+   http://localhost:8000/static/project_wide.txt
+   ```
+
+2. **App-specific static files**:
+   ```
+   http://localhost:8000/static/myapp/example.txt
+   ```
+
+   Notice the `myapp/` prefix which comes from the directory structure `myapp/static/myapp/`
+
+### Step 8: Serving Static Files in Production
+
+In production (`DEBUG=False`), you need to:
+
+1. Set `STATIC_ROOT` in settings.py:
+   ```python
+   STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+   ```
+
+2. Run collectstatic:
+   ```bash
+   python manage.py collectstatic
+   ```
+
+3. Configure your web server (Nginx example):
+   ```nginx
+   location /static/ {
+       alias /path/to/your/project/staticfiles/;
+   }
+   ```
+
+
+## Step 9: Accessing Static Files in Templates
 
 If you want to reference static files in templates (for CSS, JS, etc.):
 
