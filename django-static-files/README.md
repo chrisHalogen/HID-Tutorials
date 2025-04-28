@@ -103,6 +103,8 @@ urlpatterns = [
 
 ### Step 6: Accessing Files in Browser
 
+To serve static files directly in development, set `DEBUG=True` in `settings.py`.
+
 1. **Project-wide static files**:
    ```
    http://localhost:8000/static/project_wide.txt
