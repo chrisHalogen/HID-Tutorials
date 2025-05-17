@@ -1,4 +1,4 @@
-# Best way to render markdown in react
+# Best way to render json in react
 
 Create a folder in your `src` or `components` folder named `printJson` and create 2 files
 - `printJson.jsx` - This file does the rendering
