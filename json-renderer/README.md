@@ -6,7 +6,7 @@ Create a folder in your `src` or `components` folder named `printJson` and creat
 
 Copy to `printJson.json`:
 ```jsx
-import "./printJson.css";
+import "./printJson.jsx";
 
 export function printJson(json) {
   if (!json) return ""; //no JSON from response
@@ -73,7 +73,7 @@ In the return block, render the formatted `json` safely.
 
 ## Some Test Data
 Test Data 1
-```json
+```
 {
     name: "John Doe",
     age: 30,
@@ -84,7 +84,7 @@ Test Data 1
 ```
 
 Test Data 2
-```json
+```
 {
     id: 1,
     name: "Ada Lovelace",
@@ -95,7 +95,7 @@ Test Data 2
 ```
 
 Test Data 3
-```json
+```
 {
     category: "Electronics",
     products: [
@@ -116,7 +116,7 @@ Test Data 3
 ```
 
 Test Data 4
-```json
+```
 {
     post_id: 202,
     title: "Understanding React Hooks",
@@ -142,7 +142,7 @@ Test Data 4
 ```
 
 Test Data 5
-```json
+```
 {
     order_id: "ORD123456",
     status: "shipped",
@@ -162,7 +162,7 @@ Test Data 5
 ```
 
 Test Data 6
-```json
+```
 {
     location: "Nairobi",
     temperature: {
