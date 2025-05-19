@@ -4,9 +4,9 @@ Create a folder in your `src` or `components` folder named `printJson` and creat
 - `printJson.jsx` - This file does the rendering
 - `printJson.css` - Adjustable custom styling for the rendered JSON
 
-Copy to `printJson.json`:
+Copy to `printJson.jsx`:
 ```jsx
-import "./printJson.jsx";
+import "./printJson.css";
 
 export function printJson(json) {
   if (!json) return ""; //no JSON from response
