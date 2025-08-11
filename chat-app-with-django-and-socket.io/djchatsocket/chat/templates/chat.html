@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <h2>{{ room_name }} Chat Room</h2>
+    </div>
+    
+    <div class="room-info">
+        You are chatting as <strong>{{ username }}</strong>
+    </div>
+    
+    <div class="chat-messages" id="chat-messages">
+        {% for message in messages %}
+            <div class="message {% if message.is_current_user %}message-self{% else %}message-other{% endif %}">
+                <div class="message-content">
+                    {{ message.content }}
+                </div>
+                <div class="message-info">
+                    <span class="message-username">
+                        {% if not message.is_system and not message.is_current_user %}
+                            {{ message.username }}
+                        {% endif %}
+                    </span>
+                    <span class="message-time">
+                        {{ message.timestamp|date:"H:i" }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="chat-input">
+        <input type="text" id="message-input" class="form-control" placeholder="Type your message..." autocomplete="off">
+        <button class="btn" id="send-button">Send</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const roomName = "{{ room_name|lower }}";
+        const username = "{{ username }}";
+        const socket = io();
+        
+        // Join the room
+        socket.emit('join', {
+            username: username,
+            room: roomName
+        });
+        
+        // Handle incoming messages
+        socket.on('message', function(data) {
+            appendMessage(data);
+        });
+        
+        function appendMessage(data) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const isSystem = data.username === 'System';
+            const isCurrentUser = data.username === username;
+            
+            // Create message element
+            const messageElement = document.createElement('div');
+            
+            if (isSystem) {
+                // System message
+                messageElement.className = 'system-message';
+                messageElement.textContent = data.message;
+            } else {
+                // User message
+                messageElement.className = isCurrentUser ? 
+                    'message message-self' : 'message message-other';
+                
+                messageElement.innerHTML = `
+                    <div class="message-content">${data.message}</div>
+                    <div class="message-info">
+                        <span class="message-username">
+                            ${!isCurrentUser ? data.username : ''}
+                        </span>
+                        <span class="message-time">
+                            ${new Date(data.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                        </span>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Send message
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                socket.emit('send_message', {
+                    message: message
+                });
+                messageInput.value = '';
+            }
+        }
+        
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Scroll to bottom initially
+        const messagesContainer = document.getElementById('chat-messages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    });
+</script>
+{% endblock %}
